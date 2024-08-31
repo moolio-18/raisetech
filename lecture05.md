@@ -22,4 +22,4 @@
 ![S3](images05/6_s3.png)
 
 7.アーキテクチャの作成
-![図](images05/Practice5.drawio.png)
+![図](images05/practice5.drawio.png)
