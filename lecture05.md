@@ -15,7 +15,7 @@
 ![ターミナル](images05/4_terminal.png)
 
 5.ロードバランサーを追加して起動
-![アプリ画面](images05/1_app.png)
+![アプリ画面](images05/6_app.png)
 
 6.アプリケーションの画像をS3に保存
 ![アプリ画面](images05/6_app.png)
