@@ -20,12 +20,12 @@
 
 
 
-・[スタック１：ネットワーク](/yml10/Lecture10_network.yml)<br>
+・[スタック１：ネットワーク](/Lecture10_network.yml)<br>
 
  VPC構築/２つのAZに合計サブネットを４つ構築/IGWを構築し、パブリックサブネット２つを接続<br>
  ![VPC](images10/VPC.png)<br>
 
-・[スタック２：セキュリティ](/yml10/Lecture10_security.yml)<br>
+・[スタック２：セキュリティ](/Lecture10_security.yml)<br>
 
 　EC2のセキュリティグループ<br>
   ![EC2-security](images10/EC2-security.png)
@@ -34,7 +34,7 @@
 　S3へのアクセスのためのIAMロール、ポリシー<br>
 　![IAM](images10/IAMROLE.png)
 
-・[スタック３：アプリケーション](/yml10/Lecture10_App.yml)<br>
+・[スタック３：アプリケーション](/Lecture10_App.yml)<br>
 
   パブリックサブネットの1つにEC2を構築<br>
 　![EC2](images10/EC2.png)
