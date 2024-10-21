@@ -1,0 +1,177 @@
+AWSTemplateFormatVersion: 2010-09-09
+#-----------------------------------------------------------------
+# Parameters
+#-----------------------------------------------------------------
+Parameters:
+  
+  VPCCIDR:
+    Description: CIDRBlock for VPC
+    Type: String
+    Default: 10.1.0.0/21
+  
+  NameBase:
+    Description: this is base name.
+    Type: String
+    Default: lecture10cf
+
+Resources: 
+#-----------------------------------------------------------------
+# Resources
+#-----------------------------------------------------------------
+#----------------VPC---------------------------------------------- 
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VPCCIDR 
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub vpc-${NameBase}
+  
+#----------------Subnet, routetable, association------------------
+# SubnetA
+  subnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1a"
+      CidrBlock: 10.1.1.0/24
+      VpcId: !Ref VPC
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub subnetA-${NameBase}
+
+  routeTableA:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub routeTableA-${NameBase}
+
+  routeTableAssocA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref subnetA
+      RouteTableId: !Ref routeTableA
+
+# SubnetB
+  subnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1a"
+      CidrBlock: 10.1.2.0/24
+      VpcId: !Ref VPC
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub subnetB-${NameBase}
+  
+  routeTableB:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub routeTableB-${NameBase}
+  
+  routeTableAssocB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref subnetB
+      RouteTableId: !Ref routeTableB
+
+# SubnetC
+  subnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      CidrBlock: 10.1.3.0/24
+      VpcId: !Ref VPC
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub subnetC-${NameBase}
+
+  routeTableAssocC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref subnetC
+      RouteTableId: !Ref routeTableA
+
+# SubnetD
+  subnetD:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      CidrBlock: 10.1.4.0/24
+      VpcId: !Ref VPC
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub subnetD-${NameBase}  
+
+  routeTableD:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub routeTableD-${NameBase}
+
+  routeTableAssocD:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref subnetD
+      RouteTableId: !Ref routeTableD
+
+#----------------IGW, Attach, route-------------------------------
+  igw:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub igw-${NameBase}
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref igw
+
+  routeigw:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref routeTableA
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref igw
+
+#-----------------------------------------------------------------
+# Outputs
+#-----------------------------------------------------------------
+Outputs:
+  VPC:
+    Value: !Ref VPC
+    Export: 
+      Name: VPC
+
+  subnetA:
+    Value: !Ref subnetA
+    Export: 
+      Name: subnetA
+
+  subnetB:
+    Value: !Ref subnetB
+    Export: 
+      Name: subnetB
+
+  subnetC:
+    Value: !Ref subnetC
+    Export: 
+      Name: subnetC
+
+  subnetD:
+    Value: !Ref subnetD
+    Export: 
+      Name: subnetD
