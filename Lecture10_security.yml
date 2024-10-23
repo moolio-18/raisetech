@@ -7,6 +7,11 @@ Parameters:
     Description: this is base name.
     Type: String
     Default: lecture10cf
+  MyIP:
+    Description: this is base name.
+    Type: String
+    Default: 0.0.0.0/0
+
 #-----------------------------------------------------------------
 # Resources
 #----------------------------------------------------------------- 
@@ -22,18 +27,10 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIP: 0.0.0.0/0
+          CidrIP: !Ref MyIP
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
-          CidrIP: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIP: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 3306
-          ToPort: 3306
           CidrIP: 0.0.0.0/0
       Tags:
         - Key: Name
