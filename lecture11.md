@@ -36,8 +36,6 @@ Select number: 2
 ### sample_spec.rbにテストしたい内容を記述
 [sample_spec.rbのテストコード](/spec_helper.rb)
 
-・サンプルアプリケーションが動作しているか確認
-
 1. urlでHTTPアクセスして200 OKが返ってくるか
 1. Nginxが起動しているか
 1. Puma.が起動しているか
@@ -93,7 +91,7 @@ Githubに鍵を格納しないように注意！！
 ssh keygen（鍵の作成コマンド）
 # 今回はパスワードは設定しない。（空欄でEnterでOK）
 cd .ssh/
-ls　（中にid_rsa（秘密鍵）  id_rsa.pub（公開鍵）が作成されていることを確認）
+ls　#中にid_rsa（秘密鍵） id_rsa.pub（公開鍵）が作成されていることを確認
 ```
 catなどのコマンドで公開鍵の中身をコピーする。
 
@@ -102,8 +100,7 @@ catなどのコマンドで公開鍵の中身をコピーする。
 cd .ssh/
 touch authorized_keys
 vim authorized_keys
-(すでにauthorized_keysがある場合は touchコマンド省略、追記する）
-先ほどコピーした公開鍵を貼り付ける
+#先ほどコピーした公開鍵を貼り付ける(すでにauthorized_keysがある場合は touchコマンド省略、追記する)
 ```
 
 (手動でやってしまったがコマンドでもできるかもしれない。  
