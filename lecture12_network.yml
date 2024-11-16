@@ -62,9 +62,9 @@ Resources:
   subnetB:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Select         #
-        - 0                             # <= Correct!
-        - Fn::GetAZs: !Ref AWS::Region  #
+      AvailabilityZone: !Select         
+        - 0                             
+        - Fn::GetAZs: !Ref AWS::Region  
       CidrBlock: 10.1.2.0/24
       VpcId: !Ref VPC
       MapPublicIpOnLaunch: false
