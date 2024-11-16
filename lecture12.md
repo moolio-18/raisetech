@@ -3,7 +3,7 @@
 
 ## 課題の内容　
 
-CircleCIのサンプルコンフィグを動作するようにリポジトリに組み込む 
+CircleCIのサンプルコンフィグを動作するようにリポジトリに組み込む  
 サンプルコンフィグの内容：cfn-lintを使ってAWS CloudFormationの記載内容に間違いがないか自動で確認する 
 
 ## 実施したこと
@@ -11,9 +11,11 @@ CircleCIのサンプルコンフィグを動作するようにリポジトリに
 CircleCIのアカウントを作成　ログイン後、Githubと連携させる  
 Projectsから　Set Up Project　を押して、Configを作成⇒GitHubのプルリクエスト作成  
 GitHubのプルリクエストを承認　.circleci/config.ymlが作成される  
-まずはデフォルトで入っている内容で実行できるか確認  
-Successが表示された 
+まずはデフォルトで入っている内容で実行できるか確認したところ、下記の画像のとおりSuccessが表示された  
+
 ![default_success](images12/default_success.png)
+
+
 ![default_success2](images12/default_success2.png)
 
 Configの内容を、今回の課題の[サンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/blob/main/aws/samples/circleci/config.yml)に修正  
@@ -23,7 +25,8 @@ Configの内容を、今回の課題の[サンプルコンフィグ](https://git
 ![error](images12/error.png)
 ![error2](images12/error2.png)
 
-```表示されたエラー内容
+表示されたエラー内容  
+```
 W3010 Avoid hardcoding availability zones 'ap-northeast-1a'
 cloudformation/network.yml:37:7
 
@@ -65,7 +68,7 @@ cloudformation/app.yml:97:7
 
 Exited with code exit status 6
 ```
-エラー内容を修正。修正後のファイル（[Lecture12_network.yml](/Lecture12_network.yml)、[Lecture12_security.yml](/Lecture12_security.yml)、[Lecture12_App.yml](/Lecture12_App.yml)）を格納。
+エラー内容を修正。修正後のファイル（[Lecture12_network.yml](/lecture12_network.yml)、[Lecture12_security.yml](/lecture12_security.yml)、[Lecture12_App.yml](/lecture12_App.yml)）を格納。
 再度Workflowを回し、Successとなったことを確認。
 ![success](images12/success.png)
 ![success2](images12/success2.png)
