@@ -14,7 +14,7 @@ GitHubのプルリクエストを承認　.circleci/config.ymlが作成される
 まずはデフォルトで入っている内容で実行できるか確認  
 Successが表示された 
 ![default_success](images12/default_success.png)
-
+![default_success2](images12/default_success2.png)
 
 Configの内容を、今回の課題の[サンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/blob/main/aws/samples/circleci/config.yml)に修正  
 レポジトリ直下にディレクトリ　cloudformationを作成し、第10回課題で作成した  
