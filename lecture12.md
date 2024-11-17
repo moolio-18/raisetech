@@ -7,7 +7,7 @@ CircleCIのサンプルコンフィグを動作するようにリポジトリに
 サンプルコンフィグの内容：cfn-lintを使ってAWS CloudFormationの記載内容に間違いがないか自動で確認する 
 
 ## 実施したこと
-
+### (1)CircleCIとGithubの連携/デフォルトのconfig実行
 CircleCIのアカウントを作成　ログイン後、Githubと連携させる  
 Projectsから　Set Up Project　を押して、Configを作成⇒GitHubのプルリクエスト作成  
 GitHubのプルリクエストを承認　.circleci/config.ymlが作成される  
@@ -18,6 +18,7 @@ GitHubのプルリクエストを承認　.circleci/config.ymlが作成される
 
 ![default_success2](images12/default_success2.png)
 
+### (2)configを今回の課題に変更して実行
 Configの内容を、今回の課題の[サンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/blob/main/aws/samples/circleci/config.yml)に修正  
 レポジトリ直下にディレクトリ　cloudformationを作成し、第10回課題で作成した  
 テンプレート（[Lecture10_network.yml](/Lecture10_network.yml)、[Lecture10_security.yml](/Lecture10_security.yml)、[Lecture10_App.yml](/Lecture10_App.yml)）を格納し、Workflowを回す  
@@ -68,7 +69,9 @@ cloudformation/app.yml:97:7
 
 Exited with code exit status 6
 ```
-ワーニングを修正。修正後のファイル（[Lecture12_network.yml](/lecture12_network.yml)、[Lecture12_security.yml](/lecture12_security.yml)、[Lecture12_App.yml](/lecture12_App.yml)）を格納。
+
+### (3)ワーニングへの対応を行い、再度実行
+ワーニングに合わせてcloudformationのymlを修正。修正後のファイル（[Lecture12_network.yml](/lecture12_network.yml)、[Lecture12_security.yml](/lecture12_security.yml)、[Lecture12_App.yml](/lecture12_App.yml)）を格納。
 再度Workflowを回し、Successとなったことを確認。
 ![success](images12/success.png)
 ![success2](images12/success2.png)
@@ -76,4 +79,7 @@ Exited with code exit status 6
 
 ### 感想・学んだこと
 
-AWS CloudFormationは前々回の課題で実施しており、きちんとスタックが作成されて、実際に動いていたので問題はないと思っていたが、ワーニングが複数表示された。EC2のAZの記載方法や、ImageIDなど、関数を使用してより適切な記載方法があることがわかり非常に勉強になった。RDSのパスワードは、直接記入することがないようにParameterで自分で直接記入する形にしたが、それでもワーニングが出たので調べ、SecretsManagerを使う形に変更したので、よりセキュアな内容に変更することができた。単純にテンプレートが作成できるか、というだけではなく、セキュリティ面等も考慮したチェック機能が働くので、経験が少ない人でも、ベストプラクティスに近い形で記載するために非常に便利な仕組みだと感じた。
+AWS CloudFormationは前々回の課題で実施しており、きちんとスタックが作成されて、実際に動いていたので問題はないと思っていたが、ワーニングが複数表示された。  
+EC2のAZの記載方法や、ImageIDなど、関数を使用してより適切な記載方法があることがわかり非常に勉強になった。  
+RDSのパスワードは、直接記入することがないようにParameterで自分で直接記入する形にしたが、それでもワーニングが出たので調べ、SecretsManagerを使う形に変更したので、よりセキュアな内容に変更することができた。  
+単純にテンプレートが作成できるか、というだけではなく、セキュリティ面等も考慮したチェック機能が働くので、経験が少ない人でも、ベストプラクティスに近い形で記載するために非常に便利な仕組みだと感じた。
